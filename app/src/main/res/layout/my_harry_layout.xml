@@ -19,8 +19,9 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="95dp"
+            android:layout_height="86dp"
+
             app:srcCompat="@drawable/ic_launcher_background" />
 
         <TextView
@@ -30,6 +31,11 @@
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:padding="2dp"
+            android:textAlignment="viewStart"
+            android:paddingLeft="4dp"
+            android:gravity="start"
+            android:textColor="@color/black"
+            android:textStyle="bold"
             android:paddingHorizontal="@dimen/cardview_default_radius"
             android:text="TextView" />
 

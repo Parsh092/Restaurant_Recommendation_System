@@ -16,5 +16,6 @@
     <color name="black">#FF000000</color>
     <color name="grey">#045595</color>
     <color name="blueshgray">#3F51B5</color>
+    <color name="my_primary">#FF24D3FE</color>
 
 </resources>
