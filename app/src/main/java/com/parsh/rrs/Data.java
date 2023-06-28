@@ -48,7 +48,7 @@ public class Data extends AppCompatActivity {
                 String lat = Double.toString(latitude);
                 String lon = Double.toString(longitude);
                 String rad = Float.toString(radius);
-                String cat = category;
+                String cat = new String(category);
                 String api = "http://10.0.2.2:5000/predict";
 
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, api, new Response.Listener<String>() {

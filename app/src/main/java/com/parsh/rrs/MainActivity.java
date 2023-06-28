@@ -42,6 +42,27 @@ public class MainActivity extends AppCompatActivity {
             "Rice restaurant", "Korean restaurant"
     };
 
+    public Integer[] images = {
+            R.drawable.trailimage, R.drawable.trailimage, R.drawable.trailimage, R.drawable.trailimage,
+            R.drawable.trailimage, R.drawable.trailimage, R.drawable.trailimage, R.drawable.trailimage,
+            R.drawable.trailimage, R.drawable.trailimage, R.drawable.trailimage, R.drawable.trailimage,
+            R.drawable.trailimage, R.drawable.trailimage, R.drawable.trailimage, R.drawable.trailimage,
+            R.drawable.trailimage, R.drawable.trailimage, R.drawable.trailimage, R.drawable.trailimage,
+            R.drawable.trailimage, R.drawable.trailimage, R.drawable.trailimage, R.drawable.trailimage,
+            R.drawable.trailimage, R.drawable.trailimage, R.drawable.trailimage, R.drawable.trailimage,
+            R.drawable.trailimage, R.drawable.trailimage, R.drawable.trailimage, R.drawable.trailimage,
+            R.drawable.trailimage, R.drawable.trailimage, R.drawable.trailimage, R.drawable.trailimage,
+            R.drawable.trailimage, R.drawable.trailimage, R.drawable.trailimage, R.drawable.trailimage,
+            R.drawable.trailimage, R.drawable.trailimage, R.drawable.trailimage, R.drawable.trailimage,
+            R.drawable.trailimage, R.drawable.trailimage, R.drawable.trailimage, R.drawable.trailimage,
+            R.drawable.trailimage, R.drawable.trailimage, R.drawable.trailimage, R.drawable.trailimage,
+            R.drawable.trailimage, R.drawable.trailimage, R.drawable.trailimage, R.drawable.trailimage,
+            R.drawable.trailimage, R.drawable.trailimage, R.drawable.trailimage, R.drawable.trailimage,
+            R.drawable.trailimage, R.drawable.trailimage, R.drawable.trailimage, R.drawable.trailimage,
+            R.drawable.trailimage, R.drawable.trailimage, R.drawable.trailimage, R.drawable.trailimage,
+            R.drawable.trailimage
+    };
+
     private double latitude;
     private double longitude;
 
@@ -73,8 +94,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         listView = findViewById(R.id.listView);
-        adapter = new HarryAdapter(MainActivity.this, R.layout.my_harry_layout, arr, latitude, longitude);
-        listView.setAdapter(adapter);
 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
@@ -87,10 +106,12 @@ public class MainActivity extends AppCompatActivity {
                 latitude = lastKnownLocation.getLatitude();
                 longitude = lastKnownLocation.getLongitude();
             }
-
+            adapter = new HarryAdapter(MainActivity.this, R.layout.my_harry_layout, arr, images, latitude, longitude);
+            listView.setAdapter(adapter);
             adapter.notifyDataSetChanged();
         }
     }
+
     @SuppressLint("MissingPermission")
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -100,22 +121,20 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
     @Override
-        protected void onResume() {
-            super.onResume();
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
-                    ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
-            } else {
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 56);
-            }
-        }
-
-        @Override
-        protected void onPause() {
-            super.onPause();
-            locationManager.removeUpdates(locationListener);
+    protected void onResume() {
+        super.onResume();
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+        } else {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 56);
         }
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        locationManager.removeUpdates(locationListener);
+    }
+}
